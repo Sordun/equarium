@@ -5,7 +5,7 @@
 1) Для авторизации, аутентификации и регистрации пользователя.
 2) Для проведения транзакций между зарегистрированными пользователя.
 
-Стек: Python, Fast-api, SqlAlchemy, Alembic, СУБД: PostgreSql
+Стек: Python, FastAPI, SQLAlchemy, Alembic. СУБД: PostgreSQL
 
 ## Настройка проекта
 
