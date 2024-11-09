@@ -1,0 +1,40 @@
+version: '3.10'
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  auth_service:
+    build: .
+    command: uvicorn auth_service.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+
+  transaction_service:
+    build: .
+    command: uvicorn transaction_service.main:app --host 0.0.0.0 --port 8001
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+
+volumes:
+  pg_data:

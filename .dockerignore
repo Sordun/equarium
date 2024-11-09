@@ -1,0 +1,7 @@
+.env
+.venv
+.md
+.yml
+.git
+README.md
+Dockerfile
