@@ -17,7 +17,7 @@ from common.logger import logger
 load_dotenv()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-SECRET_KEY = os.getenv("DB_HOST")  # Замените на ваш секретный ключ
+SECRET_KEY = os.getenv("SECRET_KEY")  # Замените на ваш секретный ключ
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
